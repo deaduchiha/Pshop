@@ -105,7 +105,6 @@ class postController {
   async postList(req, res, next) {
     try {
       const { query } = req;
-      console.log(query);
       const posts = await this.#service.findAll(query);
 
       // const options = req.query; // Assuming options are passed as query parameters
