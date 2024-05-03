@@ -2,7 +2,6 @@ const autoBind = require("auto-bind");
 const postService = require("./post.service");
 const { postMessage } = require("./post.messages");
 const httpCodes = require("http-codes");
-const CategoryModel = require("../category/category.model");
 const createHttpError = require("http-errors");
 const { Types } = require("mongoose");
 const { getAddress } = require("../../common/utils/api");
@@ -14,39 +13,9 @@ require("dotenv").config();
 
 class postController {
   #service;
-  success_message;
   constructor() {
     autoBind(this);
     this.#service = postService;
-  }
-
-  async createPostPage(req, res, next) {
-    try {
-      let { slug } = req.query;
-      let showBack = false;
-      let options;
-      let match = { parent: null };
-      let category;
-      if (slug) {
-        slug = slug.trim();
-        category = await CategoryModel.findOne({ slug });
-        if (!category) throw createHttpError.NotFound(postMessage.notFound);
-        options = await this.#service.getCategoryOptions(category._id);
-        if (options.length == 0) options = null;
-        showBack = true;
-        match = { parent: category._id };
-      }
-      const categories = await CategoryModel.aggregate([{ $match: match }]);
-
-      // res.render("./pages/panel/create-post.ejs", {
-      //   categories,
-      //   showBack,
-      //   options,
-      //   category: category?._id.toString(),
-      // });
-    } catch (error) {
-      next(error);
-    }
   }
 
   async create(req, res, next) {
@@ -92,9 +61,6 @@ class postController {
         amount,
       });
 
-      this.success_message = postMessage.created;
-      return res.redirect("/post/my");
-
       return res
         .status(httpCodes.CREATED)
         .json({ meesage: postMessage.created });
@@ -107,12 +73,7 @@ class postController {
     try {
       const userId = req.user._id;
       const posts = await this.#service.findMyPosts(userId);
-      // res.render("./pages/panel/posts.ejs", {
-      //   posts,
-      //   count: posts.length,
-      //   success_message: this.success_message,
-      // });
-      this.success_message = null;
+
       return res.status(httpCodes.CREATED).json({ posts });
     } catch (error) {
       next(error);
@@ -124,10 +85,7 @@ class postController {
       const { id } = req.params;
       await this.#service.remove(id);
 
-      this.success_message = postMessage.deleted;
-      return res.redirect("/post/my");
-
-      // res.status(200).json(postMessage.deleted);
+      res.status(200).json(postMessage.deleted);
     } catch (error) {
       next(error);
     }
@@ -138,10 +96,7 @@ class postController {
       const { id } = req.params;
       const post = await this.#service.checkExist(id);
 
-      // res.locals.layout = "./layouts/website/main.ejs";
-      // res.render("./pages/home/post.ejs", { post });
-
-      // res.status(200).json(postMessage.deleted);
+      res.status(200).json({ post });
     } catch (error) {
       next(error);
     }
@@ -149,11 +104,9 @@ class postController {
 
   async postList(req, res, next) {
     try {
-      const query = req.query;
+      const { query } = req;
+      console.log(query);
       const posts = await this.#service.findAll(query);
-
-      // res.locals.layout = "./layouts/website/main.ejs";
-      // res.render("./pages/home/index.ejs", { posts });
 
       // const options = req.query; // Assuming options are passed as query parameters
       // const cursor = await this.#service.findAll(options);
@@ -181,6 +134,7 @@ class postController {
       //   clearInterval(keepAliveInterval);
       //   res.end();
       // });
+      return res.status(httpCodes.OK).json({ posts });
     } catch (error) {
       next(error);
     }

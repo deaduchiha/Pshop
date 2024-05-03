@@ -5,6 +5,7 @@ const optionModel = require("../option/option.model");
 const { isValidObjectId, Types } = require("mongoose");
 const createHttpError = require("http-errors");
 const CategoryModel = require("../category/category.model");
+const { categoryMessage } = require("../category/category.messages");
 
 class postService {
   #model;
@@ -43,10 +44,14 @@ class postService {
   }
 
   async findAll(options) {
-    let { category, search } = options;
+    let category, search;
+    if (options) {
+      ({ category, search } = options);
+    }
     let query = {};
     if (category) {
       const result = await this.#categoryModel.findOne({ slug: category });
+      if (!result) throw new createHttpError.NotFound(categoryMessage.notFound);
       let categories = await this.#categoryModel.find(
         {
           parents: result._id,
@@ -65,8 +70,9 @@ class postService {
       query["$or"] = [{ title: search }, { description: search }];
     }
     console.log(query);
-    // const posts = await this.#model.find(query, {}, { sort: { _id: -1 } });
-    return this.#model.find(query, {}, { sort: { _id: -1 } }).cursor();
+    const posts = await this.#model.find(query, {}, { sort: { _id: -1 } });
+    return posts;
+    // return this.#model.find(query, {}, { sort: { _id: -1 } }).cursor();
   }
 
   async remove(postId) {

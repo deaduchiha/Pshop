@@ -115,11 +115,20 @@
 /**
  * @swagger
  *
- * /post/list:
+ * /post/:
  *  get:
  *      summary: get all posts
  *      tags:
  *          -   Post
+ *      parameters:
+ *          -   in: query
+ *              name: search
+ *              type: string
+ *              description: search parameter
+ *          -   in: query
+ *              name: category
+ *              type: string
+ *              description: category parameter
  *      responses:
  *          200:
  *              description: success

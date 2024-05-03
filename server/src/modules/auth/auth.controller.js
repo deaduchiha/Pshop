@@ -13,8 +13,12 @@ class authController {
   async sendOTP(req, res, next) {
     try {
       const { mobile } = req.body;
-      const code = await this.#service.sendOTP(mobile);
-      return res.json({ message: authMessage.sendOtpSuccessfully , code : code });
+      const user = await this.#service.sendOTP(mobile);
+      console.log(user);
+      return res.json({
+        message: authMessage.sendOtpSuccessfully,
+        code: user.otp.code,
+      });
     } catch (error) {
       next(error);
     }
@@ -40,7 +44,7 @@ class authController {
     try {
       return res
         .clearCookie(CookieNames.AccessToken)
-        .status(200 )
+        .status(200)
         .json({ message: authMessage.logoutSuccessfully });
     } catch (error) {
       next(error);
