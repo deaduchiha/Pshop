@@ -17,7 +17,6 @@ import SearchResults from "./SearchResults";
 const SearchBarr = ({ city }) => {
   const [value, setValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [isHover, setIsHoverd] = useState(false);
 
   return (
     <InputGroup
@@ -56,12 +55,19 @@ const SearchBarr = ({ city }) => {
         type="text"
         placeholder="جست و جو"
       />
+
       <Box
         style={
           isFocused
-            ? { zIndex: "10", opacity: "1", transition: ".5s" }
-            : {
+            ? {
                 zIndex: "10",
+                opacity: "1",
+                transition: ".5s",
+                visibility: "visible",
+              }
+            : {
+                zIndex: "0",
+                visibility: "hidden",
                 opacity: "0",
                 transition: ".5s",
               }

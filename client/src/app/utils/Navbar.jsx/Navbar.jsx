@@ -71,11 +71,11 @@ export default function Navbar() {
         {/* <Box> {city} </Box> */}
 
         <Divider
-          height={"60px"}
+          height={"50px"}
           backgroundColor={"black"}
           width={".5px"}
           orientation="vertical"
-          m={1}
+          my={2.5}
         />
         <Image
           borderRadius="0"
