@@ -38,12 +38,12 @@ class postController {
       }
       const categories = await CategoryModel.aggregate([{ $match: match }]);
 
-      res.render("./pages/panel/create-post.ejs", {
-        categories,
-        showBack,
-        options,
-        category: category?._id.toString(),
-      });
+      // res.render("./pages/panel/create-post.ejs", {
+      //   categories,
+      //   showBack,
+      //   options,
+      //   category: category?._id.toString(),
+      // });
     } catch (error) {
       next(error);
     }
@@ -107,11 +107,11 @@ class postController {
     try {
       const userId = req.user._id;
       const posts = await this.#service.findMyPosts(userId);
-      res.render("./pages/panel/posts.ejs", {
-        posts,
-        count: posts.length,
-        success_message: this.success_message,
-      });
+      // res.render("./pages/panel/posts.ejs", {
+      //   posts,
+      //   count: posts.length,
+      //   success_message: this.success_message,
+      // });
       this.success_message = null;
       return res.status(httpCodes.CREATED).json({ posts });
     } catch (error) {
@@ -138,8 +138,8 @@ class postController {
       const { id } = req.params;
       const post = await this.#service.checkExist(id);
 
-      res.locals.layout = "./layouts/website/main.ejs";
-      res.render("./pages/home/post.ejs", { post });
+      // res.locals.layout = "./layouts/website/main.ejs";
+      // res.render("./pages/home/post.ejs", { post });
 
       // res.status(200).json(postMessage.deleted);
     } catch (error) {
@@ -152,8 +152,8 @@ class postController {
       const query = req.query;
       const posts = await this.#service.findAll(query);
 
-      res.locals.layout = "./layouts/website/main.ejs";
-      res.render("./pages/home/index.ejs", { posts });
+      // res.locals.layout = "./layouts/website/main.ejs";
+      // res.render("./pages/home/index.ejs", { posts });
 
       // const options = req.query; // Assuming options are passed as query parameters
       // const cursor = await this.#service.findAll(options);

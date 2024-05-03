@@ -6,8 +6,8 @@ function SwaggerConfig(app) {
     swaggerDefinition: {
       openapi: "3.0.1",
       info: {
-        title: "divar",
-        description: "NODEJS training",
+        title: "Pshop",
+        description: "Backend for Pshop",
         version: "1.0.0",
       },
     },
