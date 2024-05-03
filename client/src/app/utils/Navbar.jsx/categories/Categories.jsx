@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, Text, Input, InputGroup } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 export default function Categories() {
   const findIcon = (name) => {};
+
   const categories = [
     {
       name: "املاک",
@@ -67,6 +68,7 @@ export default function Categories() {
     },
   ];
   const [showCats, setShowcats] = useState(false);
+  console.log(showCats);
   return (
     <InputGroup padding={0} width={"fit-content"} pos={"relative"} mr={5}>
       <Flex
@@ -97,6 +99,7 @@ export default function Categories() {
 
       <Box
         opacity={showCats ? "1" : "0"}
+        visibility={showCats ? "visible" : "hidden"}
         zIndex={showCats ? "1" : "-10"}
         transition={".5s"}
         pos={"absolute"}
