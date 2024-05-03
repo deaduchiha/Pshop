@@ -69,9 +69,9 @@ class postService {
       search = new RegExp(search, "ig");
       query["$or"] = [{ title: search }, { description: search }];
     }
-    const posts = await this.#model.find(query, {}, { sort: { _id: -1 } });
-    return posts;
-    // return this.#model.find(query, {}, { sort: { _id: -1 } }).cursor();
+    // const posts = await this.#model.find(query, {}, { sort: { _id: -1 } });
+    // return posts;
+    return this.#model.find(query, {}, { sort: { _id: -1 } }).cursor();
   }
 
   async remove(postId) {
