@@ -37,9 +37,10 @@ class categoryService {
   }
 
   async find() {
-    return this.#model
-      .find({ parent: { $exists: false } })
-      .populate([{ path: "children" }]);
+    return this.#model.find({ parent: { $exists: false } }).populate({
+      path: "children",
+      populate: { path: "children", populate: { path: "children" } }, // This will populate the children of children
+    });
   }
 
   async remove(id) {

@@ -6,15 +6,20 @@ const categorySchema = new Schema(
     slug: { type: String, required: false, index: true },
     icon: { type: String, required: false },
     Image: { type: String, required: false },
-    parent: { type: Types.ObjectId, ref: "Category", required: false },
+    parent: { type: Types.ObjectId, ref: "category", required: false },
     parents: {
       type: [Types.ObjectId],
-      ref: "Category",
+      ref: "category",
       required: false,
       default: [],
     },
   },
-  { toJSON: { virtuals: true }, versionKey: false, id: false }
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    versionKey: false,
+    id: false,
+  }
 );
 
 categorySchema.virtual("children", {
@@ -23,12 +28,12 @@ categorySchema.virtual("children", {
   foreignField: "parent",
 });
 
-function autoPopulate(next) {
-  this.populate([{ path: "children" }]);
-  next();
-}
+// function autoPopulate(next) {
+//   this.populate([{ path: "children" }]);
+//   next();
+// }
 
-categorySchema.pre("find", autoPopulate).pre("findOne", autoPopulate);
+// categorySchema.pre("find", autoPopulate).pre("findOne", autoPopulate);
 
 const CategoryModel = model("category", categorySchema);
 
