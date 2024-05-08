@@ -22,7 +22,8 @@
     "framer-motion": "^11.1.7",
     "next": "^14.3.0-canary.28",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "eslint": "^8",

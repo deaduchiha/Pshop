@@ -3,8 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, Text, Input, InputGroup } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { useQuery } from "@tanstack/react-query";
+import getAllCategories from "../../../../../libs/quaries/Categories/getAllCategories";
+import { Spinner } from "@chakra-ui/react";
+import colors from "../../../../../constants/colors";
+import CategoryInsideBox from "./categoryInsideBox";
 export default function Categories() {
   const findIcon = (name) => {};
+  const { data, isLoading, isError, error } = useQuery({
+    queryFn: () => getAllCategories(),
+    queryKey: ["categories"],
+  });
 
   const categories = [
     {
@@ -67,8 +76,8 @@ export default function Categories() {
       ],
     },
   ];
-  const [showCats, setShowcats] = useState(false);
-  console.log(showCats);
+  const [showCats, setShowcats] = useState(true);
+  
   return (
     <InputGroup padding={0} width={"fit-content"} pos={"relative"} mr={5}>
       <Flex
@@ -82,7 +91,15 @@ export default function Categories() {
         justifyContent={"center"}
         dir="rlt"
       >
-        <ChevronDownIcon />
+        <ChevronDownIcon
+          boxSize={5}
+          style={
+            showCats
+              ? { transform: "rotate(180deg)", transition: ".5s" }
+              : { transform: "rotate(0deg)", transition: ".5s" }
+          }
+          mr={"5px"}
+        />
         <Text>دسته ها</Text>
         <Input
           pos={"absolute"}
@@ -105,13 +122,13 @@ export default function Categories() {
         pos={"absolute"}
         top={"100%"}
         right={"0px"}
-        width={"400px"}
         bgColor={"white"}
-        height={"400px"}
       >
-        <Flex>
-          <Flex></Flex>
-        </Flex>
+        {isLoading ? (
+          <Spinner color={colors.blue} />
+        ) : (
+          <CategoryInsideBox cats={data} />
+        )}
       </Box>
     </InputGroup>
   );

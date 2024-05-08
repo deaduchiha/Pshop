@@ -17,6 +17,7 @@ export default function Navbar() {
       justifyContent={"space-between"}
       position={"sticky"}
       fontSize={"15px"}
+      boxShadow={"0px 2px 10px 0px rgba(0,0,0,.05)"}
     >
       <Flex alignItems={"center"} mx={"20px"}>
         <Box
@@ -53,7 +54,7 @@ export default function Navbar() {
           display="flex"
           width={"fit-content"}
         >
-          <Text as={"p"}> دیوار من </Text>{" "}
+          <Text as={"p"}> فروشگاه من </Text>{" "}
           <FontAwesomeIcon style={{ marginLeft: "5px" }} icon={faUser} />
         </Box>
       </Flex>
