@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, Link, Text } from "@chakra-ui/react";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
-import colors from "../../../../../../constants/colors";
+import colors from "../../../../constants/colors";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useSelectedCat from "@/app/store/SelectedCatStore/SelectedCatStore";
+import useSelectedCat from "@/store/catStores/SelectedCatStore";
 export default function CatBtn({ icon, name, slug }) {
-  const { cat, changeCat } = useSelectedCat((state) => ({
-    cat: state.cat,
-    changeCat: state.changeCat,
+  const { Selectedcat, changeSelectedcat } = useSelectedCat((state) => ({
+    Selectedcat: state.cat,
+    changeSelectedcat: state.changeCat,
   }));
-  console.log(cat);
+
   const findIcon = (name) => {
     switch (name) {
       case "faHome":
@@ -25,7 +25,7 @@ export default function CatBtn({ icon, name, slug }) {
     <Link
       margin={"5px"}
       display={"flex"}
-      onMouseOver={() => changeCat(name)}
+      onMouseOver={() => changeSelectedcat(name)}
       _hover={{
         textDecoration: "none",
         backgroundColor: "#f0f0f0",

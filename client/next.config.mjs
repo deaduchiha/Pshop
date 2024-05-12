@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   images: {
     domains: ["s100.divarcdn.com"],
+
   },
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Link, Text } from "@chakra-ui/react";
-import colors from "../../../../../../constants/colors";
-import useSelectedCat from "@/app/store/SelectedCatStore/SelectedCatStore";
+import colors from "../../../../constants/colors";
+import useSelectedCat from "@/store/catStores/SelectedCatStore";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export default function AllCatsBtn() {

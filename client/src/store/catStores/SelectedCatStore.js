@@ -1,6 +1,6 @@
 import { create } from "zustand";
 const useSelectedCat = create((set) => ({
-  cat: "",
+  cat: "املاک",
   changeCat: (newcat) => set((state) => ({ cat: newcat })),
 }));
 

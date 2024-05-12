@@ -1,12 +1,15 @@
 // In Next.js, this file would be called: app/providers.jsx
 "use client";
-
 // We can not useState or useRef in a server component, which is why we are
 // extracting this part out into it's own file with 'use client' on top
-import { useState } from "react";
-import { QueryClient, QueryClientProvider , HydrationBoundary , dehydrate} from "@tanstack/react-query";
-import { ChakraProvider , theme} from "@chakra-ui/react";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+  HydrationBoundary,
+  dehydrate,
+} from "@tanstack/react-query";
+import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from "@/theme";
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -19,7 +22,6 @@ function makeQueryClient() {
   });
 }
 let browserQueryClient; // Variable declaration
-
 // Create a singleton instance of QueryClient for the browser environment
 browserQueryClient = undefined; // Initialize to undefined
 function getQueryClient() {
@@ -45,9 +47,7 @@ export default function ReactQueryProvider({ children }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-      {children}
-      </ChakraProvider>
-      </QueryClientProvider>
+      <ChakraProvider theme={theme}>{children}</ChakraProvider>
+    </QueryClientProvider>
   );
 }

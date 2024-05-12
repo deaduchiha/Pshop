@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/quaries/*": ["./src/libs/quaries/*"],
+      "@/templats/*": ["./src/components/templates/*"],
+      "@/navbar/*": ["./src/components/Navbar/*"],
+      "@constants/*": ["./src/constans/"]
     }
   }
 }

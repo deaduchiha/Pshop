@@ -1,13 +1,14 @@
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { Flex, Box, Divider, Text, Image } from "@chakra-ui/react";
 // import Image from "next/image";
-import myimage from "../../../../public/logo.png";
 import SearchBarr from "./searchInput/SearchBar";
 import Categories from "./categories/Categories";
-import colors from "../../../../constants/colors";
+import colors from "@/constants/colors";
+export default function Navbar({ catData }) {
 
-export default function Navbar() {
+
   const city = "تهران";
 
   return (
@@ -67,7 +68,7 @@ export default function Navbar() {
         mx={"20px"}
       >
         <SearchBarr city={city} />
-        <Categories />
+        <Categories catData={catData} />
 
         {/* <Box> {city} </Box> */}
 
