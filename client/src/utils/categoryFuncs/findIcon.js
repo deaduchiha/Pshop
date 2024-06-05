@@ -15,7 +15,7 @@ const findIcon = (name) => {
       return faCarSide;
 
     default:
-      return faHome;
+      return false;
   }
 };
 export default findIcon;

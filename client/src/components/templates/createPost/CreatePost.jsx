@@ -1,12 +1,12 @@
 import React from "react";
-
 import { Flex, Stack, Text } from "@chakra-ui/react";
 import colors from "@/theme/colors";
-export default function CreatePost() {
 
+import SelectCat from "./parts/SelectCat";
+export default function CreatePost() {
   return (
-    <Flex justifyContent={"center"} bg={"red"}>
-      <Stack minW={"400px"} bg={"white"} dir="rtl" py={"50px"}>
+    <Flex justifyContent={"center"}>
+      <Stack minW={"550px"} bg={"white"} dir="rtl" py={"50px"}>
         <Text fontWeight={"500"} fontSize={"18px"} as="h1">
           ثبت آگهی
         </Text>
@@ -18,7 +18,7 @@ export default function CreatePost() {
         >
           انتخاب دسته‌بندی
         </Text>
-        {/* <ParentsBtn> */}
+        <SelectCat />
       </Stack>
     </Flex>
   );

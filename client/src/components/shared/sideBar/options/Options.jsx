@@ -4,7 +4,7 @@ import { Accordion, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Priceoption from "./defaults/Priceoption";
 import findOptionSlug from "@/utils/optionFuncs/getOption";
-import getOptionBySlug from "@/api/optionBySlug";
+import getOptionBySlug from "@/api/options/optionBySlug";
 import { useQuery } from "@tanstack/react-query";
 import OptionBtn from "./btn/OptionBtn";
 export default function Options() {

@@ -2,9 +2,17 @@
 const generateTree = (data) => {
   const tree = [];
   data.forEach((parent) => {
-    const node = { slug: parent.slug };
-    if (parent.children) {
+    const node = { slug: parent.slug, name: parent.name };
+    if (parent.icon) {
+      node.icon = parent.icon;
+    }
+    if (parent.children.length) {
+      node.leaf = false;
       node.children = generateTree(parent.children); // Recursive call
+    }
+    if (!parent.children.length) {
+      node.children = [];
+      node.leaf = true;
     }
     tree.push(node);
   });

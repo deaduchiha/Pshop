@@ -2,26 +2,13 @@
 import React, { useState } from "react";
 import { Box, Flex, Text, Input, InputGroup } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import useChildCatStore from "@/store/catStores/getChildCat";
-import useParentCatStore from "@/store/catStores/getParentsCat";
+
 import CategoryInsideBox from "./catMenu";
 import colors from "@/theme/colors";
-import generateTree from "@/utils/categoryFuncs/treeFuncs/generateTree";
-import useSlugtree from "@/store/catStores/slugTree";
+
 
 export default function Categories({ catData }) {
-  const { setChildCategories, categories } = useChildCatStore((state) => ({
-    setChildCategories: state.setCategories,
-    categories: state.categories,
-  }));
-  const setmenucategories = useParentCatStore((state) => state.setCategories);
-  const setTree = useSlugtree((state) => state.setTree);
-  // initial setups 
-  if (categories.length <= 0) {
-    setChildCategories(catData);
-    setmenucategories(catData);
-    setTree(generateTree(catData));
-  }
+
   const [showCats, setShowcats] = useState(false);
 
   return (

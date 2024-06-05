@@ -109,6 +109,7 @@ class optionController {
     try {
       const { slug } = req.params;
       const options = await this.#service.findByCategorySlug(slug);
+      // res.setHeader("Access-Control-Allow-Origin", "*");
       return res.json(options);
     } catch (error) {
       next(error);
@@ -117,3 +118,13 @@ class optionController {
 }
 
 module.exports = new optionController();
+
+// async findByCategorySlug(req, res, next) {
+//   try {
+//     const { slug } = req.params;
+//     const options = await this.#service.findByCategorySlug(slug);
+//     return res.json(options);
+//   } catch (error) {
+//     next(error);
+//   }
+// }

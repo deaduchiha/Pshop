@@ -17,6 +17,7 @@ async function main() {
   app.use(express.static("public"));
   app.use(mainRouter);
 
+
   SwaggerConfig(app);
   notFoundHandler(app);
   allExceptionHandler(app);

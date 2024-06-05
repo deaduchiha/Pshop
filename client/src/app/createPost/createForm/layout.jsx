@@ -1,7 +1,6 @@
-
 export const metadata = {
-  title: "CreatePost",
-  description: "hello and welcome to createPost Page",
+  title: "createFrom",
+  description: "hello and welcome to createForm Page",
 };
 
 export default async function createPostLayout({ children }) {

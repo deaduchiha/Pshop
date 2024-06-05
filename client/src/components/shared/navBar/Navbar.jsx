@@ -7,8 +7,26 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CreatePostBtn from "./navBtns/CreatePostBtn";
 import MyShopBtn from "./navBtns/myShopBtn";
+import generateTree from "@/utils/categoryFuncs/treeFuncs/generateTree";
+import useSlugtree from "@/store/catStores/slugTree";
+import useChildCatStore from "@/store/catStores/getChildCat";
+import useParentCatStore from "@/store/catStores/getParentsCat";
+import LoginModal from "../loginModal/LoginModal";
 
 export default function Navbar({ catData }) {
+
+  const { setChildCategories, categories } = useChildCatStore((state) => ({
+    setChildCategories: state.setCategories,
+    categories: state.categories,
+  }));
+  const setmenucategories = useParentCatStore((state) => state.setCategories);
+  const setTree = useSlugtree((state) => state.setTree);
+  // initial setups
+  if (categories.length <= 0) {
+    setChildCategories(catData);
+    setmenucategories(catData);
+    setTree(generateTree(catData));
+  }
   const city = "تهران";
   const pathname = usePathname();
   return (
@@ -58,6 +76,7 @@ export default function Navbar({ catData }) {
           />
         </Box>
       </Flex>
+      <LoginModal />
     </Flex>
   );
 }

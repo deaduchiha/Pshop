@@ -1,21 +1,20 @@
+import sideSlugSearch from "@/utils/categoryFuncs/treeFuncs/sideSlugSearch";
 import searchInTree from "@/utils/categoryFuncs/treeFuncs/searchInTree";
 import { create } from "zustand";
 const initialState = {
-  tree: [],
-  foundedCat: {
-    selectedParent: { name: "", image: "" },
-    selectedChild: "",
-    selectedLilChild: "",
-  },
+  tree: { name: "همه اگهی ها", slug: "root", children: [], leaf: false },
 };
 const useSlugtree = create((set) => ({
   ...initialState,
   setTree: (newTree) =>
     set((state) => {
-      return { tree: newTree };
+      return { tree: { ...state.tree, children: newTree } };
     }),
   searchTree: async (tree, slug) => {
     return searchInTree(tree, slug);
+  },
+  sideSearchSlug: async (tree, slug) => {
+    return sideSlugSearch(tree, slug);
   },
 }));
 

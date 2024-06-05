@@ -9,11 +9,13 @@ const catDataBuilder = (initialD = initial) => {
     (initialD = {
       ...initialD,
       selectedParent: { slug: slug, image: image },
+      selectedChild: "All",
     });
   const changeChild = (slug) =>
     (initialD = {
       ...initialD,
       selectedChild: slug,
+      selectedLilChild: "All",
     });
   const changeLilChild = (slug) =>
     (initialD = {

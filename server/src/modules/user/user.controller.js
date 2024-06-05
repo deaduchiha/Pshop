@@ -10,6 +10,7 @@ class userController {
   }
   async whoami(req, res, next) {
     try {
+      console.log("here user :", req);
       const user = req.user;
       return res.json(user);
     } catch (error) {
