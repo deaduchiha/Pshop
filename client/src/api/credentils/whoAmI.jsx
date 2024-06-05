@@ -1,8 +1,20 @@
 import api from "@/utils/config";
+import { getAccessToken } from "@/cookies/getCookie";
 
 const whoAmI = async () => {
-  const res = await api.get("/user/whoami", {});
+  const accessToken = await getAccessToken();
 
-  return res;
+  try {
+    console.log("a");
+    const res = await api.get("user/whoami", {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
+    console.log("b");
+    return console.log(res);
+  } catch (err) {
+    return console.log(err);
+  }
 };
 export default whoAmI;

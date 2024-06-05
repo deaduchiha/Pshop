@@ -12,7 +12,7 @@ const CheckOtpApi = async (mobile, code) => {
       { headers: "application/json" }
     );
     const cookieStore = cookies();
-    cookieStore.set("access_token", res.token, {
+    cookieStore.set("AccessToken", res.token, {
       // httpOnly: true,
       // secure: "production",
     });

@@ -25,7 +25,7 @@ export default function CatBtn({ icon, name, slug, image }) {
       varient={"link"}
       margin={"5px"}
       display={"flex"}
-      onMouseOver={() => changeSelectedcat({slug,  name, image })}
+      onMouseOver={() => changeSelectedcat({ slug, name, image })}
       onClick={() => changeCat(changeCatdata)}
       _hover={{
         textDecoration: "none",

@@ -1,15 +1,16 @@
+import { getAccessToken } from "@/cookies/getCookie";
 import axios from "axios";
 
 const api = axios.create({ baseURL: "http://localhost:3000/" });
 
-// const getCookie = document.cookie;
+api.interceptors.request.use(async (config) => {
+  //   const accessToken = await getAccessToken();
 
-// console.log(getCookie);
-
-// api.interceptors.request.use(async (config) => {
-//   //   config.headers.Authorization = value;
-//   return config;
-// });
+  //   if (accessToken) {
+  //     config.headers["Authorization"] = accessToken;
+  //   }
+  return config;
+});
 
 api.interceptors.response.use((response) => response.data);
 
